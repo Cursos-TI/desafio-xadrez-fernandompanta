@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <conio.h>
+
+
 /*
 // Desafio de Xadrez - MateCheck
 // Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
@@ -31,24 +34,67 @@
 
 Tema 4 - Movimentação de Peças de Xadrez
 
-Desafio nivel AVENTUREIRO
+Desafio nivel MESTRE
 
-Modificações do nivel Novato parao nível Aventureiro
+Modificações para o nivel Mestre em relacao ao nível Aventureiro
 
-- Criado a movimentação do Cavalo utilizando loops aninhados.
+- Criacao de Loops Recursivos subistituindo os loops originais da Torre, Bisco e Rainha.
+- Criacao de Loops Aninhados para o Cavalo
 
 
 */
 
 
 
+        // Algoritimo de movimentacao da TORRE (Loop recursivo)
+
+        void movimentoTorreBranco(int qnt_casas_T_B) {
+        if (qnt_casas_T_B > 0)
+        {
+        movimentoTorreBranco(qnt_casas_T_B - 1); 
+        printf("Direira %d casas\n", qnt_casas_T_B); 
+        }
+        
+        }
+        //-----------------------------------------------------
+
+        // Algoritimo de movimentacao do BISPO (Loop recursivo)
+
+        void movimentoBispoBranco(int qnt_casas_B_B) {
+        if (qnt_casas_B_B > 0)
+        {
+        movimentoBispoBranco(qnt_casas_B_B - 1); 
+        printf("Diagonal direira para cima %d casas\n", qnt_casas_B_B); 
+        }
+        
+        }
+        //-----------------------------------------------------
+
+        // Algoritimo de movimentacao da RAINHA (Loop recursivo)
+
+        void movimentoRainhaBranco(int qnt_casas_R_B) {
+        if (qnt_casas_R_B > 0)
+        {
+        movimentoRainhaBranco(qnt_casas_R_B - 1); 
+        printf("Esquerda %d casas\n", qnt_casas_R_B); 
+        }
+        
+        }
+        //-----------------------------------------------------
+
+
+
 int main (){
 
 
-        int torre_branco, bispo_branco, rainha_branco; // Variaveis para designar o inicio da movimentacao das pecas
-        int movi_qtdade_casas; // Variavel para o usuario informar a quantidade de vezes a peca vai se mover
-        int direcao_torre_branco, direcao_bispo_branco, direcao_rainha_branco; // Variaveis para determinar a direcao das pecas
-        int cavalo_branco, primeiro_movi_cavalo_branco, segundo_movi_cavalo_branco, completo_movi_cavalo_branco = 1; // Variaveis de movimentacao do Cavalo Branco
+        // Variaveis criadas para utlizacao no desafio Nivel Mestre 
+
+        int movi_peca;
+        int casas_torre_branco = 5; // Vairavel da quantidade fixa de movimentos da Torre Branca
+        int casas_bispo_branco = 5; // Vairavel da quantidade fixa de movimentos do Bispo Branco
+        int casas_rainha_branco = 8; // Vairavel da quantidade fixa de movimentos da Rainha Branco
+        int completo_movi_cavalo_branco = 1; // Vairavel da quantidade fixa de movimentos do Cavalo Branco
+
 
         system("cls");
 
@@ -69,328 +115,60 @@ int main (){
         // Entrada de dados para movimentacao da TORRE BRANCA
         // Usuario escreve a quantidade de casas em que a Torre vai se movimentar, em seguida, escolhe a direção
         
-        printf("Escreva a quantidade de casas em que a peca\nabaixo ira movimentar.\n");
-            printf("Torre branco: ");
-            scanf(" %d", &movi_qtdade_casas);
-                printf("\n");
-                    printf("Escolha a direcao abaixo:\n");
-                        printf("1. Horizontal Direita\n");
-                            printf("2. Horizontal Esquerda\n");
-                                printf("3. Vertical para cima\n");
-                                    printf("4. Vertical para baixo\n");
-                                        printf("Escreva:");
-                                        scanf(" %d", &direcao_torre_branco);
-                                            printf("\n");
-                                                printf("\n");
 
-                // Calculo da movimentacao da TORRE BRANCA usando o FOR
+        do // Utilizacao do Loop no MENU DE SELECAO para retornar se escolha for diferente do existente 
+        {
 
-                for (torre_branco = 1; torre_branco < (movi_qtdade_casas + 1); torre_branco++)
-                {
-                    if (direcao_torre_branco == 1)
-                    {
-                        printf("Torre move-se para Horizontal Direita %d casas\n", torre_branco);
-                        
-                    } else if (direcao_torre_branco == 2)
-                    {
-                        printf("Torre move-se para Horizontal Esquerda %d casas\n", torre_branco);
-                    
-                    } else if (direcao_torre_branco == 3)
-                    {
-                        printf("Torre move-se para Vertical Direita %d casas\n", torre_branco);
-                    
-                    } else if (direcao_torre_branco == 4)
-                    {
-                        printf("Torre move-se para Vertical Esquerda %d casas\n", torre_branco);
+            printf("Escolha abaixo qual peca ira se movimentar:\n"); //Menu para selecao da peca que ira se movimentar
+            printf("1. Torre branco: \n");
+            printf("2. Bispo branco: \n");
+            printf("3. Rainha branco: \n");
+            printf("4. Cavalo branco: \n");
+            printf("Escreva: ");
+            scanf(" %d", &movi_peca);
+            printf("\n");
 
-                    } else {
-                        printf("Opcao invalida!\n");
-                        printf("\n");
-                            
-                    }
-                }
+        } while (movi_peca != 1 && movi_peca != 2 && movi_peca != 3 && movi_peca != 4); // Fechamento do loop do MENU DE SELECAO
 
 
 
-                // Entrada de dados para movimentacao do BISPO BRANCO
-                // Usuario escreve a quantidade de casas em que a Bispo vai se movimentar, em seguida, escolhe a direção
+
+        switch (movi_peca) // Abertura do SWITCH para escolha da peca que ira se movimentar
+        {
+        case 1: // Direcao da movimentacao da TORRE BRANCA
+            printf("Direcao da torre branca:\n");
+            movimentoTorreBranco(casas_torre_branco);
+            break;
         
-        printf("\n");
-        printf("\n");
-        printf("Escreva a quantidade de casas em que a peca\nabaixo ira movimentar.\n");
-            printf("Bispo branco: ");
-            scanf(" %d", &movi_qtdade_casas);
-                printf("\n");
-                    printf("Escolha a direcao abaixo:\n");
-                        printf("1. Diagonal Direita para cima\n");
-                            printf("2. Diagonal Direita para baixo\n");
-                                printf("3. Diagonal Esquerda para cima\n");
-                                    printf("4. Diagonal Esqueda para baixo\n");
-                                        printf("Escreva:");
-                                        scanf(" %d", &direcao_bispo_branco);
-                                            printf("\n");
-                                                printf("\n");
+        case 2: // Direcao da movimentacao do BISPO BRANCO
+            printf("Direcao do bispo branco:\n");
+            movimentoBispoBranco(casas_bispo_branco);
+            break;
+        
+        case 3: // Direcao da movimentacao da RAINHA BRANCA
+            printf("Direcao da rainha branca:\n");
+            movimentoRainhaBranca(casas_rainha_branco);
+            break;
+        
 
-                // Calculo da movimentacao da BISPO BRANCO usando o FOR
-
-                for (bispo_branco = 1; bispo_branco < (movi_qtdade_casas + 1); bispo_branco++)
+        case 4: // Direcao da movimentacao do CAVALO BRANCO
+            printf("Direcao do cavalo branco:\n");
+   
+                while (completo_movi_cavalo_branco--)
                 {
-                    if (direcao_bispo_branco == 1)
+                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
                     {
-                        printf("Bispo move-se para Diagonal Direita para cima %d casas\n", bispo_branco);
-                        
-                    } else if (direcao_bispo_branco == 2)
-                    {
-                        printf("Bispo move-se para Diagonal Direita para baixo %d casas\n", bispo_branco);
-                    
-                    } else if (direcao_bispo_branco == 3)
-                    {
-                        printf("Bispo move-se para Diagonal Esquerda para cima %d casas\n", bispo_branco);
-                    
-                    } else if (direcao_bispo_branco == 4)
-                    {
-                        printf("Bispo move-se para Diagonal Esquerda para baixo %d casas\n", bispo_branco);
-
-                    
-                    } else {
-                        printf("Opcao invalida!\n");
-                        printf("\n");
-                            
+                    printf("Cima\n"); // Imprime a movimentação do Cavalo Branco para cima duas vezes.
                     }
+                    printf("Direita\n"); // Imprime a movimentação do Cavalo Branco para a direita uma vez.
+
                 }
+            break;
 
+        default:
+            break;
+        } // Fechamento do SWITCH para escolha da peca que ira se movimentar
 
-
-
-                // Entrada de dados para movimentacao do RAINHA BRANCA
-                // Usuario escreve a quantidade de casas em que a Rainha vai se movimentar, em seguida, escolhe a direção
-
-        printf("\n");
-        printf("\n");
-        printf("Escreva a quantidade de casas em que a peca\nabaixo ira movimentar.\n");
-            printf("Rainha branco: ");
-            scanf(" %d", &movi_qtdade_casas);
-                printf("\n");
-                    printf("Escolha a direcao abaixo:\n");
-                        printf("1. Diagonal Direita para cima\n");
-                            printf("2. Diagonal Direita para baixo\n");
-                                printf("3. Diagonal Esquerda para cima\n");
-                                    printf("4. Diagonal Esqueda para baixo\n");
-                                        printf("5. Horizontal Direita\n");
-                                            printf("6. Horizontal Esquerda\n");
-                                                printf("7. Vertical para cima\n");
-                                                    printf("8. Vertical para baixo\n");
-                                                printf("Escreva:");
-                                                scanf(" %d", &direcao_rainha_branco);
-                                                printf("\n");
-                                                printf("\n");
-
-                    // Calculo da movimentacao da RAINHA BRANCA usando o FOR
-
-                for (rainha_branco = 1; rainha_branco < (movi_qtdade_casas + 1); rainha_branco++)
-                {
-                    if (direcao_rainha_branco == 1)
-                    {
-                        printf("Rainha move-se para Diagonal Direita para cima %d casas\n", rainha_branco);
-                        
-                    } else if (direcao_rainha_branco == 2)
-                    {
-                        printf("Rainha move-se para Diagonal Direita para baixo %d casas\n", rainha_branco);
-                    
-                    } else if (direcao_rainha_branco == 3)
-                    {
-                        printf("Rainha move-se para Diagonal Esquerda para cima %d casas\n", rainha_branco);
-                    
-                    } else if (direcao_rainha_branco == 4)
-                    {
-                        printf("Rainha move-se para Diagonal Esquerda para baixo %d casas\n", rainha_branco);
-
-                    } else if (direcao_rainha_branco == 5)
-                    {
-                        printf("Rainha move-se para Horizontal Direita %d casas\n", rainha_branco);
-                        
-                    } else if (direcao_rainha_branco == 6)
-                    {
-                        printf("Rainha move-se para Horizontal Esquerda %d casas\n", rainha_branco);
-                    
-                    } else if (direcao_rainha_branco == 7)
-                    {
-                        printf("Rainha move-se para Vertical para cima %d casas\n", rainha_branco);
-                    
-                    } else if (direcao_rainha_branco == 8)
-                    {
-                        printf("Rainha move-se para Vertical para baixo %d casas\n", rainha_branco);
-
-                    
-                    } else {
-                        printf("Opcao invalida!\n");
-                        printf("\n");
-
-                    }
-                }
-
-
-                // Entrada de dados para movimentacao do CAVALO BRANCO
-                // Como o Cavalo se movimenta em L, o usuário escolhe para qual direção a peça vai se movimentar primeiro e depois escolhe a segunda direção.
-
-            printf("\n");
-            printf("\n");
-            printf("Escolha o movimento em que a peca abaixo ira realizar.\n");
-                printf("Cavalo branco: ");
-                    printf("\n");
-                        printf("Escolha o primeiro movimento abaixo:\n");
-                            printf("1. Para cima\n");
-                                printf("2. Para baixo\n");
-                                    printf("3. Lateral direita\n");
-                                        printf("4. Lateral esquerda\n");
-                                            printf("Escreva: ");
-                                            scanf(" %d", &primeiro_movi_cavalo_branco);
-
-
-                    // Calculo da movimentacao da CAVALO BRANCO usando o WHILE e FOR (Loops aninhados)
-
-                
-                
-                    if (primeiro_movi_cavalo_branco == 1) //------------------- Algoritimo de movimento do cavalo para CIMA - Esquerda/Direira
-                    {
-                        printf("Movimento para cima.\n");
-                        printf("\n");
-                        printf("Escolha o segundo movimento.\n");
-                        printf("1. Direita\n");
-                        printf("2. Esquerda.\n");
-                        printf("Escreva: ");
-                        scanf("%d", &segundo_movi_cavalo_branco);
-                        printf("\n");
-
-                            if (segundo_movi_cavalo_branco == 1)
-                            {
-                                while (completo_movi_cavalo_branco--)
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Cima\n");
-                                    }
-                                        printf("Direita\n");
-                                }
-
-                            } else if (segundo_movi_cavalo_branco == 2)
-                            {
-                                while (completo_movi_cavalo_branco--)
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Cima\n");
-                                    }
-                                        printf("Esquerda\n");
-                                }
-
-                            } 
-
-                    } else if (primeiro_movi_cavalo_branco == 2) //------------------- Algoritimo de movimento do cavalo para BAIXO - Esquerda/Direira
-
-                    {
-                        printf("Movimento para baixo.\n");
-                        printf("\n");
-                        printf("Escolha o segundo movimento.\n");
-                        printf("1. Direita\n");
-                        printf("2. Esquerda.\n");
-                        printf("Escreva: ");
-                        scanf("%d", &segundo_movi_cavalo_branco);
-                        printf("\n");
-
-                            if (segundo_movi_cavalo_branco == 1)
-                            {
-                                while (completo_movi_cavalo_branco--)
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Baixo\n");
-                                    }
-                                        printf("Direita\n");
-                                }
-
-                            } else if (segundo_movi_cavalo_branco == 2)
-                            {
-                                while (completo_movi_cavalo_branco--) 
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Baixo\n");
-                                    }
-                                        printf("Esquerda\n");
-                                }
-
-                            }
-                    } else if (primeiro_movi_cavalo_branco == 3) //------------------- Algoritimo de movimento do cavalo para LATERAL DIREITA - Cima/Baixo
-
-                    {
-                        printf("Movimento para Lateral direita.\n");
-                        printf("\n");
-                        printf("Escolha o segundo movimento.\n");
-                        printf("1. Cima\n");
-                        printf("2. Baixo.\n");
-                        printf("Escreva: ");
-                        scanf("%d", &segundo_movi_cavalo_branco);
-                        printf("\n");
-
-                            if (segundo_movi_cavalo_branco == 1)
-                            {
-                                while (completo_movi_cavalo_branco--)
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Lateral direita\n");
-                                    }
-                                        printf("Cima\n");
-                                }
-
-                            } else if (segundo_movi_cavalo_branco == 2)
-                            {
-                                while (completo_movi_cavalo_branco--)
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Lateral direita\n");
-                                    }
-                                        printf("Baixo\n");
-                                }
-
-                            }
-                    } else if (primeiro_movi_cavalo_branco == 4) //------------------- Algoritimo de movimento do cavalo para LATERAL ESQUERDA - Cima/Baixo
-
-                    {
-                        printf("Movimento para Lateral esquerda.\n");
-                        printf("\n");
-                        printf("Escolha o segundo movimento.\n");
-                        printf("1. Cima\n");
-                        printf("2. Baixo.\n");
-                        printf("Escreva: ");
-                        scanf("%d", &segundo_movi_cavalo_branco);
-                        printf("\n");
-
-                            if (segundo_movi_cavalo_branco == 1)
-                            {
-                                while (completo_movi_cavalo_branco--)
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Lateral esquerda\n");
-                                    }
-                                        printf("Cima\n");
-                                }
-
-                            } else if (segundo_movi_cavalo_branco == 2)
-                            {
-                                while (completo_movi_cavalo_branco--)
-                                {
-                                    for (int i = 0; i < 2; i++) // Criado variável i somente para movimentação do Cavalo Branco.
-                                    {
-                                        printf("Lateral esquerda\n");
-                                    }
-                                        printf("Baixo\n");
-                                }
-
-                            }
-                    }
-                    
+        return 0;
+                         
 }
